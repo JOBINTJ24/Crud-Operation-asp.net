@@ -1,0 +1,108 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+        }
+
+            .form-container h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .form-container label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .form-container input[type=text],
+            .form-container select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+
+            .form-container input[type=submit] {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .form-container input[type=submit]:hover {
+                    background-color: #45a049;
+                }
+
+        .alert-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+        }
+    </style>
+    <title>Update_record1</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Contact Form</h2>
+        @{
+            foreach (System.Data.DataRow dr in ViewBag.student.Rows)
+            {
+                <form method="POST">
+                    <label for="sname">Name:</label>
+                    <input type="text" id="sname" name="sname" value="@dr["Sname"]" required>
+
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" value="@dr["Email"]"  name="email" required>
+
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" value="@dr["Phone"]" name="phone" required>
+
+                    <label for="department">Department:</label>
+                    <input type="text" id="department" value="@dr["department"]" name="department" required>
+
+                    <label for="choice">Action</label>
+                    <select id="choice" name="choice" required>
+                        <option value="update">Update</option>
+                    </select>
+
+                    <input type="submit" value="Submit">
+                </form>
+
+            }
+
+        }
+    </div>
+
+    <div class="alert-container">
+        @{
+            if (TempData["msg"] != null)
+            {
+                <p>@TempData["msg"]</p>
+            }
+        }
+    </div>
+</body>
+</html>
